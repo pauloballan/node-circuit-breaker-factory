@@ -26,3 +26,8 @@ node_modules
 
 # Users Environment Variables
 .lock-wscript
+
+# IntelliJ
+.idea/workspace.xml
+.idea/tasks.xml
+/.idea/misc.xml
