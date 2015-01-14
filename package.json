@@ -1,0 +1,43 @@
+{
+  "name": "node-circuit-breaker-factory",
+  "version": "1.0.0",
+  "description": "Factory module for creating circuit breakers, to be used with any type of callback.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "NODE_ENV=test istanbul cover --report teamcity --report lcov _mocha -- --ui bdd --check-leaks --recursive --slow 200 --reporter spec test",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Springworks/node-circuit-breaker-factory.git"
+  },
+  "keywords": [
+    "stability",
+    "circuit",
+    "breaker"
+  ],
+  "author": "Springworks",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Springworks/node-circuit-breaker-factory/issues"
+  },
+  "homepage": "https://github.com/Springworks/node-circuit-breaker-factory",
+  "devDependencies": {
+    "bunyan": "^1.2.3",
+    "chai": "^1.10.0",
+    "coveralls": "^2.11.2",
+    "eslint": "^0.11.0",
+    "istanbul": "^0.3.5",
+    "mocha": "^2.1.0",
+    "mocha-lcov-reporter": "0.0.1",
+    "should": "^4.6.0"
+  },
+  "dependencies": {
+    "circuit-breaker-js": "0.0.1",
+    "hoek": "^2.11.0",
+    "input-validator": "https://github.com/Springworks/node-input-validator/archive/v1.1.1.tar.gz"
+  }
+}
