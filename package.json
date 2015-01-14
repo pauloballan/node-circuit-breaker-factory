@@ -1,5 +1,5 @@
 {
-  "name": "node-circuit-breaker-factory",
+  "name": "circuit-breaker-factory",
   "version": "1.0.0",
   "description": "Factory module for creating circuit breakers, to be used with any type of callback.",
   "main": "index.js",
