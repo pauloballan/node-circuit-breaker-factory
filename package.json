@@ -38,6 +38,6 @@
   "dependencies": {
     "circuit-breaker-js": "0.0.1",
     "hoek": "^2.11.0",
-    "input-validator": "https://github.com/Springworks/node-input-validator/archive/v1.1.1.tar.gz"
+    "@springworks/input-validator": "^2.0.3"
   }
 }
