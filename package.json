@@ -24,6 +24,9 @@
   "bugs": {
     "url": "https://github.com/Springworks/node-circuit-breaker-factory/issues"
   },
+  "engines": {
+    "npm": ">=2.7.0"
+  },
   "homepage": "https://github.com/Springworks/node-circuit-breaker-factory",
   "devDependencies": {
     "bunyan": "^1.2.3",
