@@ -2,28 +2,28 @@
 
 var Bunyan = require('bunyan');
 
-var validator = require('../lib/validator.js');
+var breaker = require('../lib/circuit-breaker.js');
 
 var internals = {};
 
 describe(__filename, function() {
 
-  describe('validateCreateParams', function() {
+  describe('internals.validateCreateParams', function() {
     var logger,
-        valid_config;
+    valid_config;
 
     beforeEach(function() {
       valid_config = internals.createValidConfig();
     });
 
     beforeEach(function() {
-      logger = Bunyan.createLogger({ name: 'test-logger' });
+      logger = Bunyan.createLogger({name: 'test-logger'});
     });
 
     describe('with valid logger and config', function() {
 
       it('should return validated object', function() {
-        var validated = validator.validateCreateParams({
+        var validated = breaker.internals.validateCreateParams({
           config: valid_config,
           logger: logger
         });
@@ -39,7 +39,7 @@ describe(__filename, function() {
 
       it('should throw validation error', function() {
         (function() {
-          validator.validateCreateParams({
+          breaker.internals.validateCreateParams({
             config: valid_config
           });
         }).should.throw('Validation Failed');
@@ -51,7 +51,7 @@ describe(__filename, function() {
 
       it('should throw validation error', function() {
         (function() {
-          validator.validateCreateParams({
+          breaker.internals.validateCreateParams({
             logger: logger
           });
         }).should.throw('Validation Failed');
@@ -71,7 +71,8 @@ describe(__filename, function() {
       });
 
       it('should return config with all properties defined', function() {
-        var validated = validator.internals.validateConfigParams(valid_config);
+        var validated = breaker.internals.validateConfigParams(valid_config);
+
         validated.source_name.should.eql(valid_config.source_name);
         validated.target_name.should.eql(valid_config.target_name);
         validated.window_duration.should.eql(valid_config.window_duration);
@@ -99,44 +100,14 @@ describe(__filename, function() {
 
     });
 
-    describe('missing window_duration param', function() {
+    Object.keys(breaker.internals.default_config).forEach(function(key) {
+      describe('missing ' + key, function() {
 
-      it('should throw validation error', function() {
-        internals.assertMissingConfigParam('window_duration');
+        it('should use the default value', function() {
+          internals.assertDefaultValueIsUsed('window_duration');
+        });
+
       });
-
-    });
-
-    describe('missing num_buckets param', function() {
-
-      it('should throw validation error', function() {
-        internals.assertMissingConfigParam('num_buckets');
-      });
-
-    });
-
-    describe('missing timeout_duration param', function() {
-
-      it('should throw validation error', function() {
-        internals.assertMissingConfigParam('timeout_duration');
-      });
-
-    });
-
-    describe('missing error_threshold param', function() {
-
-      it('should throw validation error', function() {
-        internals.assertMissingConfigParam('error_threshold');
-      });
-
-    });
-
-    describe('missing volume_threshold param', function() {
-
-      it('should throw validation error', function() {
-        internals.assertMissingConfigParam('volume_threshold');
-      });
-
     });
 
   });
@@ -144,12 +115,21 @@ describe(__filename, function() {
 });
 
 
+internals.assertDefaultValueIsUsed = function(param_name) {
+  var config = internals.createValidConfig(), validated;
+  delete config[param_name];
+
+  validated = breaker.internals.validateConfigParams(config);
+  validated[param_name].should.be.eql(breaker.internals.default_config[param_name]);
+};
+
+
 internals.assertMissingConfigParam = function(param_name) {
   var config = internals.createValidConfig();
   delete config[param_name];
 
   (function() {
-    validator.internals.validateConfigParams(config);
+    breaker.internals.validateConfigParams(config);
   }).should.throw('Validation Failed');
 };
 
@@ -158,10 +138,10 @@ internals.createValidConfig = function() {
   return {
     source_name: 'foo',
     target_name: 'bar',
-    window_duration: 1000,
-    num_buckets: 10,
-    timeout_duration: 3000,
-    error_threshold: 50,
-    volume_threshold: 5
+    window_duration: 9999,
+    num_buckets: 9,
+    timeout_duration: 2999,
+    error_threshold: 49,
+    volume_threshold: 3
   };
 };
