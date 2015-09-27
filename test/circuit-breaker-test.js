@@ -72,7 +72,7 @@ describe(__filename, function() {
           'numBuckets',
           'timeoutDuration',
           'errorThreshold',
-          'volumeThreshold'
+          'volumeThreshold',
         ]);
       });
 
@@ -90,16 +90,16 @@ describe(__filename, function() {
   describe('internals.configureBreakerLogging', function() {
 
     describe('with a created circuit breaker', function() {
-      var circuit_breaker,
-          metrics = {
-            totalCount: 4,
-            errorCount: 3,
-            errorPercentage: 75
-          };
+      var circuit_breaker;
+      var metrics = {
+        totalCount: 4,
+        errorCount: 3,
+        errorPercentage: 75,
+      };
 
       beforeEach(function() {
-        var config = internals.createValidConfig(),
-            logger = internals.createLogger();
+        var config = internals.createValidConfig();
+        var logger = internals.createLogger();
         circuit_breaker = factory.create(config, logger);
       });
 
@@ -112,17 +112,15 @@ describe(__filename, function() {
           error_percentage: 75,
           state: 'open',
           target_name: 'bar',
-          source_name: 'foo'
+          source_name: 'foo',
         });
       });
 
       it('should log duration when moving between states', function(done) {
-        var result,
-            timeout_duration = 100;
-
+        var timeout_duration = 100;
         circuit_breaker.onCircuitOpen(metrics);
         setTimeout(function() {
-          result = circuit_breaker.onCircuitClose(metrics);
+          var result = circuit_breaker.onCircuitClose(metrics);
           result.payload.duration.should.be.within(timeout_duration / 2, timeout_duration * 2);
           done();
         }, timeout_duration);
@@ -142,7 +140,7 @@ internals.createValidConfig = function() {
     num_buckets: 10,
     timeout_duration: 3000,
     error_threshold: 50,
-    volume_threshold: 5
+    volume_threshold: 5,
   };
 };
 
