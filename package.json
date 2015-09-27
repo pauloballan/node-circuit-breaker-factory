@@ -29,18 +29,18 @@
   },
   "homepage": "https://github.com/Springworks/node-circuit-breaker-factory",
   "devDependencies": {
-    "bunyan": "^1.2.3",
-    "chai": "^1.10.0",
-    "coveralls": "^2.11.2",
-    "eslint": "^0.11.0",
-    "istanbul": "^0.3.5",
-    "mocha": "^2.1.0",
+    "bunyan": "1.5.1",
+    "chai": "1.10.0",
+    "coveralls": "2.11.4",
+    "eslint": "0.11.0",
+    "istanbul": "0.3.21",
+    "mocha": "2.3.3",
     "mocha-lcov-reporter": "0.0.1",
-    "should": "^4.6.0"
+    "should": "4.6.5"
   },
   "dependencies": {
     "circuit-breaker-js": "0.0.1",
-    "hoek": "^2.11.0",
-    "@springworks/input-validator": "^2.0.3"
+    "hoek": "2.16.3",
+    "@springworks/input-validator": "2.0.3"
   }
 }
