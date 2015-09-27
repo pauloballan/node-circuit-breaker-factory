@@ -40,7 +40,6 @@
   },
   "dependencies": {
     "@springworks/input-validator": "3.0.2",
-    "circuit-breaker-js": "0.0.1",
-    "hoek": "2.16.3"
+    "circuit-breaker-js": "0.0.1"
   }
 }
