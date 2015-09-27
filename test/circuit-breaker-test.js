@@ -1,7 +1,6 @@
 'use strict';
 
 var Bunyan = require('bunyan');
-
 var factory = require('../lib/circuit-breaker.js');
 
 var internals = {};

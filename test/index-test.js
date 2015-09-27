@@ -1,7 +1,5 @@
 'use strict';
 
-require('should');
-
 var index = require('../index.js');
 
 describe(__filename, function() {
