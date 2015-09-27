@@ -16,8 +16,7 @@
   },
   "keywords": [
     "stability",
-    "circuit",
-    "breaker"
+    "circuit-breaker"
   ],
   "author": "Springworks",
   "license": "MIT",
