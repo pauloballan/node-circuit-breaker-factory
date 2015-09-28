@@ -1,7 +1,5 @@
 'use strict';
 
-require('should');
-
 var index = require('../index.js');
 
 describe(__filename, function() {
@@ -10,7 +8,7 @@ describe(__filename, function() {
 
     it('should export functions from circuit-breaker.js', function() {
       index.should.have.properties([
-        'create'
+        'create',
       ]);
     });
 
