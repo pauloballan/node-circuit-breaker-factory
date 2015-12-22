@@ -1,6 +1,6 @@
 'use strict';
 
-var factory = require('./lib/circuit-breaker.js');
+const factory = require('./lib/circuit-breaker');
 
 
 /**

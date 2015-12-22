@@ -1,52 +1,52 @@
 'use strict';
 
-var Bunyan = require('bunyan');
-var factory = require('../lib/circuit-breaker.js');
+const Bunyan = require('bunyan');
+const factory = require('../lib/circuit-breaker');
 
-var internals = {};
+const internals = {};
 
-describe(__filename, function() {
+describe('test/circuit-breaker-test.js', () => {
 
-  describe('create', function() {
-    var logger;
+  describe('create', () => {
+    let logger;
 
-    beforeEach(function() {
+    beforeEach(() => {
       logger = internals.createLogger();
     });
 
-    describe('with a valid config and logger', function() {
-      var config;
+    describe('with a valid config and logger', () => {
+      let config;
 
-      beforeEach(function() {
+      beforeEach(() => {
         config = internals.createValidConfig();
       });
 
-      it('should create a circuit breaker', function() {
+      it('should create a circuit breaker', () => {
         factory.create(config, logger);
       });
 
     });
 
-    describe('with an invalid config', function() {
-      var config;
+    describe('with an invalid config', () => {
+      let config;
 
-      beforeEach(function() {
+      beforeEach(() => {
         config = internals.createValidConfig();
         delete config.source_name;
       });
 
-      it('should throw a validation error', function() {
-        (function() {
+      it('should throw a validation error', () => {
+        (() => {
           factory.create(config, logger);
         }).should.throw('Validation Failed');
       });
 
     });
 
-    describe('with valid config but missing logger', function() {
+    describe('with valid config but missing logger', () => {
 
-      it('should throw a validation error', function() {
-        (function() {
+      it('should throw a validation error', () => {
+        (() => {
           factory.create(internals.createValidConfig(), null);
         }).should.throw('Validation Failed');
       });
@@ -55,17 +55,17 @@ describe(__filename, function() {
 
   });
 
-  describe('internals.createCircuitBreakerOptsFromConfig', function() {
+  describe('internals.createCircuitBreakerOptsFromConfig', () => {
 
-    describe('with valid config', function() {
-      var opts;
+    describe('with valid config', () => {
+      let opts;
 
-      beforeEach(function() {
-        var config = internals.createValidConfig();
+      beforeEach(() => {
+        const config = internals.createValidConfig();
         opts = factory.internals.createCircuitBreakerOptsFromConfig(config);
       });
 
-      it('should convert config params to options matching inner module', function() {
+      it('should convert config params to options matching inner module', () => {
         opts.should.have.properties([
           'windowDuration',
           'numBuckets',
@@ -75,7 +75,7 @@ describe(__filename, function() {
         ]);
       });
 
-      it('should define listeners to circuit states', function() {
+      it('should define listeners to circuit states', () => {
         opts.should.have.property('onCircuitOpen');
         opts.onCircuitOpen.should.have.type('function');
         opts.should.have.property('onCircuitClose');
@@ -86,24 +86,24 @@ describe(__filename, function() {
 
   });
 
-  describe('internals.configureBreakerLogging', function() {
+  describe('internals.configureBreakerLogging', () => {
 
-    describe('with a created circuit breaker', function() {
-      var circuit_breaker;
-      var metrics = {
+    describe('with a created circuit breaker', () => {
+      let circuit_breaker;
+      const metrics = {
         totalCount: 4,
         errorCount: 3,
         errorPercentage: 75,
       };
 
-      beforeEach(function() {
-        var config = internals.createValidConfig();
-        var logger = internals.createLogger();
+      beforeEach(() => {
+        const config = internals.createValidConfig();
+        const logger = internals.createLogger();
         circuit_breaker = factory.create(config, logger);
       });
 
-      it('should log metrics', function() {
-        var result;
+      it('should log metrics', () => {
+        let result;
         result = circuit_breaker.onCircuitOpen(metrics);
         result.payload.should.have.properties({
           error_count: 3,
@@ -115,11 +115,11 @@ describe(__filename, function() {
         });
       });
 
-      it('should log duration when moving between states', function(done) {
-        var timeout_duration = 100;
+      it('should log duration when moving between states', done => {
+        const timeout_duration = 100;
         circuit_breaker.onCircuitOpen(metrics);
-        setTimeout(function() {
-          var result = circuit_breaker.onCircuitClose(metrics);
+        setTimeout(() => {
+          const result = circuit_breaker.onCircuitClose(metrics);
           result.payload.duration.should.be.within(timeout_duration / 2, timeout_duration * 2);
           done();
         }, timeout_duration);

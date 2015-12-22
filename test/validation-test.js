@@ -1,28 +1,28 @@
 'use strict';
 
-var Bunyan = require('bunyan');
-var breaker = require('../lib/circuit-breaker.js');
+const Bunyan = require('bunyan');
+const breaker = require('../lib/circuit-breaker');
 
-var internals = {};
+const internals = {};
 
-describe(__filename, function() {
+describe('test/validation-test.js', () => {
 
-  describe('internals.validateCreateParams', function() {
-    var logger;
-    var valid_config;
+  describe('internals.validateCreateParams', () => {
+    let logger;
+    let valid_config;
 
-    beforeEach(function() {
+    beforeEach(() => {
       valid_config = internals.createValidConfig();
     });
 
-    beforeEach(function() {
+    beforeEach(() => {
       logger = Bunyan.createLogger({ name: 'test-logger' });
     });
 
-    describe('with valid logger and config', function() {
+    describe('with valid logger and config', () => {
 
-      it('should return validated object', function() {
-        var validated = breaker.internals.validateCreateParams({
+      it('should return validated object', () => {
+        const validated = breaker.internals.validateCreateParams({
           config: valid_config,
           logger: logger,
         });
@@ -34,10 +34,10 @@ describe(__filename, function() {
 
     });
 
-    describe('missing logger', function() {
+    describe('missing logger', () => {
 
-      it('should throw validation error', function() {
-        (function() {
+      it('should throw validation error', () => {
+        (() => {
           breaker.internals.validateCreateParams({
             config: valid_config,
           });
@@ -46,10 +46,10 @@ describe(__filename, function() {
 
     });
 
-    describe('missing config', function() {
+    describe('missing config', () => {
 
-      it('should throw validation error', function() {
-        (function() {
+      it('should throw validation error', () => {
+        (() => {
           breaker.internals.validateCreateParams({
             logger: logger,
           });
@@ -60,17 +60,17 @@ describe(__filename, function() {
 
   });
 
-  describe('internals.validateConfigParams', function() {
+  describe('internals.validateConfigParams', () => {
 
-    describe('with valid params', function() {
-      var valid_config;
+    describe('with valid params', () => {
+      let valid_config;
 
-      beforeEach(function() {
+      beforeEach(() => {
         valid_config = internals.createValidConfig();
       });
 
-      it('should return config with all properties defined', function() {
-        var validated = breaker.internals.validateConfigParams(valid_config);
+      it('should return config with all properties defined', () => {
+        const validated = breaker.internals.validateConfigParams(valid_config);
 
         validated.source_name.should.eql(valid_config.source_name);
         validated.target_name.should.eql(valid_config.target_name);
@@ -83,27 +83,27 @@ describe(__filename, function() {
 
     });
 
-    describe('missing source_name param', function() {
+    describe('missing source_name param', () => {
 
-      it('should throw validation error', function() {
+      it('should throw validation error', () => {
         internals.assertMissingConfigParam('source_name');
       });
 
     });
 
-    describe('missing target_name param', function() {
+    describe('missing target_name param', () => {
 
-      it('should throw validation error', function() {
+      it('should throw validation error', () => {
         internals.assertMissingConfigParam('target_name');
       });
 
     });
 
-    Object.keys(breaker.internals.default_config).forEach(function(key) {
+    Object.keys(breaker.internals.default_config).forEach(key => {
 
-      describe('missing ' + key, function() {
+      describe('missing ' + key, () => {
 
-        it('should use the default value', function() {
+        it('should use the default value', () => {
           internals.assertDefaultValueIsUsed('window_duration');
         });
 
@@ -117,19 +117,19 @@ describe(__filename, function() {
 
 
 internals.assertDefaultValueIsUsed = function(param_name) {
-  var config = internals.createValidConfig();
+  const config = internals.createValidConfig();
   delete config[param_name];
 
-  var validated = breaker.internals.validateConfigParams(config);
+  const validated = breaker.internals.validateConfigParams(config);
   validated[param_name].should.be.eql(breaker.internals.default_config[param_name]);
 };
 
 
 internals.assertMissingConfigParam = function(param_name) {
-  var config = internals.createValidConfig();
+  const config = internals.createValidConfig();
   delete config[param_name];
 
-  (function() {
+  (() => {
     breaker.internals.validateConfigParams(config);
   }).should.throw('Validation Failed');
 };

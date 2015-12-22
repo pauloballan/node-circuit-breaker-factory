@@ -1,12 +1,12 @@
 'use strict';
 
-var index = require('../index.js');
+const index = require('../index');
 
-describe(__filename, function() {
+describe('test/index-test.js', () => {
 
-  describe('index.exports', function() {
+  describe('index.exports', () => {
 
-    it('should export functions from circuit-breaker.js', function() {
+    it('should export functions from circuit-breaker.js', () => {
       index.should.have.properties([
         'create',
       ]);
