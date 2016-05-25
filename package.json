@@ -1,6 +1,5 @@
 {
   "name": "@springworks/circuit-breaker-factory",
-  "version": "2.0.1",
   "description": "Factory module for creating circuit breakers, to be used with any type of callback.",
   "main": "index.js",
   "directories": {
@@ -9,7 +8,10 @@
   "scripts": {
     "test": "NODE_ENV=test istanbul cover _mocha -- test",
     "lint": "eslint --cache .",
-    "coveralls": "cat ./coverage/lcov.info | coveralls"
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "commit": "commit-wizard",
+    "postpublish": "greenkeeper-postpublish"
   },
   "dependencies": {
     "@springworks/input-validator": "4.0.13",
@@ -24,12 +26,20 @@
     "eslint-plugin-import": "1.8.0",
     "eslint-plugin-mocha": "2.2.0",
     "eslint-plugin-springworks": "2.0.1",
-    "istanbul": "0.4.3",
-    "mocha": "2.5.3"
+    "greenkeeper-postpublish": "1.0.0",
+    "istanbul": "1.0.0-alpha.2",
+    "mocha": "2.5.3",
+    "pre-git": "3.8.4",
+    "semantic-release": "4.3.5"
   },
   "engines": {
     "node": ">=4",
     "npm": ">=2.7"
+  },
+  "config": {
+    "pre-git": {
+      "commit-msg": "conventional"
+    }
   },
   "repository": {
     "type": "git",
