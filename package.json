@@ -10,7 +10,8 @@
     "lint": "eslint --cache .",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
-    "commit": "commit-wizard"
+    "commit": "commit-wizard",
+    "postpublish": "greenkeeper-postpublish"
   },
   "dependencies": {
     "@springworks/input-validator": "4.0.13",
@@ -25,6 +26,7 @@
     "eslint-plugin-import": "1.8.0",
     "eslint-plugin-mocha": "2.2.0",
     "eslint-plugin-springworks": "2.0.1",
+    "greenkeeper-postpublish": "1.0.0",
     "istanbul": "1.0.0-alpha.2",
     "mocha": "2.5.3",
     "pre-git": "3.8.4",
