@@ -12,7 +12,7 @@
     "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "dependencies": {
-    "@springworks/input-validator": "4.0.12",
+    "@springworks/input-validator": "4.0.13",
     "circuit-breaker-js": "0.0.1"
   },
   "devDependencies": {
