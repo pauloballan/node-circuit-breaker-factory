@@ -1,6 +1,6 @@
 {
   "name": "@springworks/circuit-breaker-factory",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Factory module for creating circuit breakers, to be used with any type of callback.",
   "main": "index.js",
   "directories": {
