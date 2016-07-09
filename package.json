@@ -14,7 +14,7 @@
     "postpublish": "greenkeeper-postpublish"
   },
   "dependencies": {
-    "@springworks/input-validator": "4.0.19",
+    "@springworks/input-validator": "4.0.20",
     "circuit-breaker-js": "0.0.1"
   },
   "devDependencies": {
