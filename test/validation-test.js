@@ -26,10 +26,7 @@ describe('test/validation-test.js', () => {
           config: valid_config,
           logger: logger,
         });
-        validated.should.have.keys([
-          'config',
-          'logger',
-        ]);
+        validated.should.have.keys('config', 'logger');
       });
 
     });
