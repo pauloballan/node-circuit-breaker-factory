@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@springworks/test-harness": "1.5.1",
-    "bunyan": "1.8.1",
+    "bunyan": "1.8.4",
     "coveralls": "2.11.14",
     "eslint": "3.8.1",
     "eslint-config-springworks": "7.0.6",
