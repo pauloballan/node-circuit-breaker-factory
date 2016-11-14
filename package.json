@@ -21,7 +21,7 @@
     "@springworks/test-harness": "1.5.1",
     "bunyan": "1.8.4",
     "coveralls": "2.11.15",
-    "eslint": "3.9.0",
+    "eslint": "3.10.1",
     "eslint-config-springworks": "7.0.6",
     "eslint-plugin-import": "2.1.0",
     "eslint-plugin-mocha": "4.7.0",
