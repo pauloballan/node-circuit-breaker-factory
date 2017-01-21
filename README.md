@@ -1,5 +1,7 @@
 # Circuit Breaker Factory
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Springworks/node-circuit-breaker-factory.svg)](https://greenkeeper.io/)
+
 A factory for creating circuit breakers with additional sugar, e.g. state logging.
 
 [![Build Status](https://travis-ci.org/Springworks/node-circuit-breaker-factory.png?branch=master)](https://travis-ci.org/Springworks/node-circuit-breaker-factory)
