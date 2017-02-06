@@ -18,7 +18,7 @@
     "circuit-breaker-js": "0.0.1"
   },
   "devDependencies": {
-    "@springworks/test-harness": "1.5.4",
+    "@springworks/test-harness": "1.5.5",
     "bunyan": "1.8.5",
     "coveralls": "2.11.16",
     "eslint": "3.14.1",
